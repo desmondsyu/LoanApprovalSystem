@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Apply</title>
+</head>
+<body th:style="'display: flex; justify-content: start; align-items: center; flex-direction: column;'">
+
+<div th:if="${messages}"
+     th:style="'color: red; text-align: start;'">
+    <p>Invalid application:</p>
+    <div th:each="message : ${messages}">
+        <p th:text="${message}"></p>
+    </div>
+</div>
+
+<form th:action="@{/submit}" th:method="POST"
+      th:style="'padding: 20px; width: 20%; min-width: 96px; display: flex; justify-content: center; flex-direction: column; gap: 5px;'"
+>
+    <label>Applicant Name</label>
+    <input type="text" name="applicantName"/>
+
+    <label>Email</label>
+    <input type="text" name="email"/>
+
+    <label>Loan Amount</label>
+    <input type="number" name="loanAmount"/>
+
+    <label>Credit Score</label>
+    <input type="number" name="creditScore"/>
+
+    <button type="submit"
+            th:style="'width: 40%; min-width: 48px; background-color: blue; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; display: inline-block; font-weight: bold; text-align: center;'"
+    >Apply
+    </button>
+</form>
+</body>
+</html>

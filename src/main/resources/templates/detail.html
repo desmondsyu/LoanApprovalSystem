@@ -1,0 +1,19 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="loanDetails(appl)">
+    <div th:style="'padding: 20px; border-radius: 5px; border: 1px solid #ddd;'">
+        <h3>Loan Application</h3>
+        <p><strong>Applicant Name:</strong> <span th:text="${appl.applicantName}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${appl.email}"></span></p>
+        <p><strong>Loan Amount:</strong> <span th:text="${appl.loanAmount}"></span></p>
+        <p><strong>Credit Score:</strong> <span th:text="${appl.creditScore}"></span></p>
+        <p><strong>Status:</strong>
+            <span th:text="${appl.status}"
+            th:style="'font: bold;' + ${appl.status == 'Approved' ? 'color: green;' :
+              appl.status == 'Rejected' ? 'color: red;' : 'color: orange;'}"
+            ></span>
+        </p>
+    </div>
+</div>
+</body>
+</html>

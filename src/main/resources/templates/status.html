@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Status</title>
+</head>
+<body>
+
+<div th:style="'display: flex; width: screen;'">
+    <div th:style="'width: 40%; margin: 0 auto;'">
+        <a th:href="@{/apply}"
+           th:style="'background-color: blue; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; display: inline-block; font-weight: bold; text-align: center;'"
+        >Apply Loan
+        </a>
+
+        <table th:style="'width: 100%; border-collapse: collapse; margin: 20px 0;'">
+            <thead>
+            <tr th:style="'background-color: #f2f2f2; text-align: left;'">
+                <th th:style="'padding: 2px; border: 1px solid #ddd;'">Applicant Name</th>
+                <th th:style="'padding: 2px; border: 1px solid #ddd;'">Loan Amount</th>
+                <th th:style="'padding: 2px; border: 1px solid #ddd;'">Status</th>
+                <th th:style="'padding: 2px; border: 1px solid #ddd;'">Detail</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="appl: ${list}"
+                th:style="'text-align: left;'"
+            >
+                <td th:text="${appl.applicantName}"
+                    th:style="'padding: 2px; border: 1px solid #ddd;'"
+                ></td>
+                <td th:text="${appl.loanAmount}"
+                    th:style="'padding: 2px; border: 1px solid #ddd;'"
+                ></td>
+                <td
+                        th:text="${appl.status}"
+                        th:style="'padding: 2px; border: 1px solid #ddd; ' +
+              ${appl.status == 'Approved' ? 'background-color: green;' :
+              appl.status == 'Rejected' ? 'background-color: red;' : 'background-color: orange;'}"
+                >
+                </td>
+                <td>
+                    <form th:action="@{/status/{id}(id=${appl.id})}" th:method="GET">
+                        <button type="submit"
+                                th:style="'background-color: #8cb1ed; padding: 1px 2px; border-radius: 1px; text-decoration: none; display: inline-block; text-align: center;'"
+                        >
+                            View
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:style="'width: 40%; margin: 0 auto;'">
+        <div th:if="${appl}">
+            <div th:replace="detail :: loanDetails(${appl})"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
